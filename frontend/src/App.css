@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+@layer components {
+    .card-panel {
+        @apply bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200 transition-all duration-300 hover:shadow-md;
+        scroll-margin-top: 100px;
+    }
+
+    .section-title {
+        @apply text-lg md:text-xl font-extrabold text-slate-800 mb-5 flex items-center gap-2 border-b border-slate-100 pb-4;
+    }
+
+    .input-field {
+        @apply w-full p-4 text-base text-slate-900 border-2 border-slate-200 rounded-2xl focus:ring-4 focus:ring-red-100 focus:border-red-500 outline-none transition-all bg-slate-50 hover:bg-white;
+    }
+
+    .input-label {
+        @apply block text-sm font-black text-slate-600 uppercase mb-2 tracking-wide;
+    }
+
+    .btn-primary {
+        @apply w-full bg-red-600 text-white font-bold text-lg py-4 rounded-2xl hover:bg-red-700 shadow-md hover:shadow-lg transition-all active:scale-[0.98] flex justify-center items-center gap-2;
+    }
+
+    .btn-secondary {
+        @apply bg-slate-900 text-white px-6 py-3.5 rounded-2xl text-base font-bold hover:bg-slate-800 shadow-md transition-all active:scale-[0.98];
+    }
+
+    .btn-outline {
+        @apply bg-white text-slate-700 border-2 border-slate-200 px-5 py-3.5 rounded-2xl font-bold text-base hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-[0.98] flex items-center justify-center gap-2 whitespace-nowrap;
+    }
+
+    .badge-base {
+        @apply text-xs md:text-sm px-4 py-2 rounded-full font-bold border shadow-sm;
+    }
+}
