@@ -11,24 +11,24 @@ export const calculateDistance = (lat1, lon1, lat2, lon2) => {
 };
 
 export const getIspuColor = (kategori) => {
-    let colors = '';
+    let colors;
     switch (kategori) {
         case 'Baik': colors = 'bg-green-100 text-green-800 border-green-300'; break;
         case 'Sedang': colors = 'bg-blue-100 text-blue-800 border-blue-300'; break;
         case 'Tidak Sehat': colors = 'bg-yellow-100 text-yellow-800 border-yellow-300'; break;
         case 'Sangat Tidak Sehat': colors = 'bg-red-100 text-red-800 border-red-300'; break;
-        case 'Berbahaya (Hitam)': colors = 'bg-slate-900 text-white border-slate-700 animate-pulse shadow-lg'; break;
+        case 'Berbahaya (Hitam)': colors = 'bg-slate-900 text-white border-slate-700'; break;
         default: colors = 'bg-gray-100 text-gray-800 border-gray-300';
     }
     return `badge-base ${colors}`;
 };
 
 export const getStatusBadge = (status) => {
-    let colors = '';
+    let colors;
     switch (status) {
         case 'Menunggu Verifikasi': colors = 'bg-amber-100 text-amber-800 border-amber-300'; break;
         case 'Diverifikasi': colors = 'bg-blue-100 text-blue-800 border-blue-300'; break;
-        case 'Proses Pemadaman': colors = 'bg-orange-100 text-orange-800 border-orange-300 animate-pulse'; break;
+        case 'Proses Pemadaman': colors = 'bg-orange-100 text-orange-800 border-orange-300'; break;
         case 'Padam': colors = 'bg-emerald-100 text-emerald-800 border-emerald-300'; break;
         case 'Laporan Palsu': colors = 'bg-rose-100 text-rose-800 border-rose-300'; break;
         default: colors = 'bg-gray-100 text-gray-800 border-gray-300';

@@ -44,7 +44,7 @@ export const getNews = async (req, res) => {
             title: item.title,
             description: item.contentSnippet || item.content || 'Klik untuk membaca detail berita.',
             url: item.link,
-            image: item.enclosure?.url || 'https://via.placeholder.com/300x200?text=Berita+Karhutla',
+            image: item.enclosure?.url || null,
             source: { name: item.sourceName || 'BERITA TERKINI' }
         }));
 

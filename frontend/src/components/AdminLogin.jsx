@@ -1,22 +1,21 @@
+import { Lock, CircleAlert } from 'lucide-react';
+
 export default function AdminLogin({ adminEmail, setAdminEmail, adminPassword, setAdminPassword, loginError, handleLoginSubmit }) {
     return (
-        <div className="max-w-md mx-auto my-16 bg-white p-10 rounded-3xl shadow-xl border border-slate-100">
-            <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-slate-900 text-white rounded-2xl flex items-center justify-center mx-auto text-3xl mb-4 shadow-md">🔐</div>
-                <h2 className="text-2xl font-black text-slate-800">Area Satgas</h2>
-                <p className="text-slate-500 mt-2 text-sm">Login khusus petugas BPBD & Damkar</p>
-            </div>
-            {loginError && <div className="mb-6 p-4 bg-rose-50 border border-rose-200 text-rose-700 text-sm rounded-2xl font-bold text-center">⚠️ {loginError}</div>}
-            <form onSubmit={handleLoginSubmit} className="space-y-5">
+        <div className="mx-auto my-10 max-w-md panel p-6 md:p-8">
+            <h2 className="flex items-center gap-2 text-2xl font-semibold"><Lock size={22} aria-hidden="true" />Masuk petugas</h2>
+            <p className="mt-1 text-[15px] text-muted">Khusus petugas BPBD dan Damkar.</p>
+            {loginError && <p role="alert" className="mt-4 flex items-start gap-2 rounded-control bg-[#FBE0E0] p-3 text-sm font-medium text-[#8A1212]"><CircleAlert size={18} className="mt-0.5 shrink-0" aria-hidden="true" />{loginError}</p>}
+            <form onSubmit={handleLoginSubmit} className="mt-5 space-y-4">
                 <div>
-                    <label className="input-label">Username</label>
-                    <input type="text" required value={adminEmail} onChange={(e) => setAdminEmail(e.target.value)} className="input-field" placeholder="Ketik username..." />
+                    <label htmlFor="adm-user" className="field-label">Nama pengguna</label>
+                    <input id="adm-user" type="text" required value={adminEmail} onChange={(e) => setAdminEmail(e.target.value)} className="field" autoComplete="username" />
                 </div>
                 <div>
-                    <label className="input-label">Password</label>
-                    <input type="password" required value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} className="input-field" placeholder="Ketik password..." />
+                    <label htmlFor="adm-pass" className="field-label">Kata sandi</label>
+                    <input id="adm-pass" type="password" required value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} className="field" autoComplete="current-password" />
                 </div>
-                <button type="submit" className="btn-secondary w-full py-4 text-lg mt-2">Masuk ke Sistem</button>
+                <button type="submit" className="btn-ink w-full">Masuk</button>
             </form>
         </div>
     );

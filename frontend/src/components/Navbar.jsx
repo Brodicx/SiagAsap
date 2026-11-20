@@ -1,101 +1,71 @@
 import { useState } from 'react';
+import { Menu, X, MapPin, Lock, LogOut, LayoutDashboard, Siren } from 'lucide-react';
+
+const NAV = [
+    { href: '#kualitas-udara', label: 'Kualitas udara' },
+    { href: '#posko', label: 'Fasilitas kesehatan' },
+    { href: '#berita', label: 'Berita' },
+];
 
 export default function Navbar({ currentView, setCurrentView, headerLocation, isAdminLoggedIn, handleLogout }) {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [open, setOpen] = useState(false);
+    const isPublic = currentView === 'user';
+    const goHome = () => { setCurrentView('user'); setOpen(false); window.scrollTo(0, 0); };
+    const openReport = () => { setCurrentView('report'); setOpen(false); window.scrollTo(0, 0); };
 
     return (
-        <header className="bg-red-600 text-white shadow-md sticky top-0 z-50">
-            <div className="max-w-6xl mx-auto px-5 py-4 flex justify-between items-center">
-
-                {/* KIRI: Logo & Navigasi Desktop */}
-                <div className="flex items-center gap-5">
-                    <button
-                        onClick={() => { setCurrentView('user'); window.scrollTo(0, 0); }}
-                        className="hover:opacity-90 transition text-left flex items-center"
-                    >
-                        <img src="/logopanjang.png" alt="SiagAsap" className="h-10 md:h-14 w-auto object-contain" />
+        <header className="sticky top-0 z-50 border-b border-line bg-surface">
+            <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-4 py-2.5 md:px-6">
+                <div className="flex items-center gap-8">
+                    <button onClick={goHome} className="flex min-h-11 items-center cursor-pointer" aria-label="SiagAsap, ke beranda">
+                        <img src="/logo-siagasap.png" alt="SiagAsap" width="154" height="44" className="h-11 w-auto object-contain" />
                     </button>
-
-                    {/* Menu Desktop (Layar Laptop/PC) */}
-                    {currentView === 'user' && (
-                        <nav className="hidden lg:flex items-center gap-5 pl-6 border-l-2 border-red-500/50">
-                            <a href="#kualitas-udara" className="text-sm font-bold text-red-50 hover:text-white hover:underline underline-offset-4 transition">💨 Kualitas Udara</a>
-                            <a href="#lapor" className="text-sm font-bold text-red-50 hover:text-white hover:underline underline-offset-4 transition">🚨 Lapor Api</a>
-                            <a href="#posko" className="text-sm font-bold text-red-50 hover:text-white hover:underline underline-offset-4 transition">🏥 Posko Medis</a>
-                            <a href="#berita" className="text-sm font-bold text-red-50 hover:text-white hover:underline underline-offset-4 transition">📰 Berita Terkini</a>
+                    {isPublic && (
+                        <nav aria-label="Navigasi utama" className="hidden lg:flex items-center gap-1">
+                            {NAV.map((n) => (
+                                <a key={n.href} href={n.href} className="rounded-control px-3 py-2 text-[15px] font-medium text-muted hover:bg-canvas hover:text-ink">{n.label}</a>
+                            ))}
                         </nav>
                     )}
                 </div>
 
-                {/* KANAN: Status Lokasi, Tombol Login, & Tombol Hamburger Mobile */}
-                <div className="flex items-center gap-3">
-                    <span className="text-sm bg-red-800 text-white px-4 py-1.5 rounded-full font-bold shadow-inner border border-red-700/50 items-center gap-1.5 hidden md:flex">
-                        📍 <span>{headerLocation}</span>
-                    </span>
+                <div className="flex items-center gap-2">
+                    {isPublic && (
+                        <span className="hidden md:inline-flex items-center gap-1.5 text-sm text-muted" title="Wilayah yang sedang ditampilkan">
+                            <MapPin size={16} aria-hidden="true" />
+                            <span className="max-w-[180px] truncate">{headerLocation}</span>
+                        </span>
+                    )}
+                    {isPublic && <button type="button" onClick={openReport} className="btn-brand hidden sm:inline-flex"><Siren size={18} aria-hidden="true" />Lapor titik api</button>}
 
                     {!isAdminLoggedIn ? (
-                        <button onClick={() => setCurrentView('login')} className={`px-4 py-2 rounded-xl text-sm font-bold transition flex items-center gap-2 ${currentView === 'login' ? 'bg-slate-900 text-white shadow' : 'bg-red-700 text-white hover:bg-slate-900'}`}>
-                            🔒 Login Admin
+                        <button onClick={() => { setCurrentView('login'); setOpen(false); }} className="btn-line hidden sm:inline-flex" aria-current={currentView === 'login' ? 'page' : undefined}>
+                            <Lock size={16} aria-hidden="true" />Admin
                         </button>
                     ) : (
-                        <div className="flex gap-2">
-                            <button onClick={() => setCurrentView('admin')} className={`px-4 py-2 rounded-xl text-sm font-bold transition ${currentView === 'admin' ? 'bg-slate-900 text-white shadow' : 'bg-red-700 text-white hover:bg-slate-900'}`}>
-                                🛠️ Dashboard
-                            </button>
-                            <button onClick={handleLogout} className="text-sm font-bold bg-slate-900 text-rose-300 border border-slate-700 px-4 py-1.5 rounded-xl hover:bg-rose-600 hover:text-white transition">
-                                Keluar
-                            </button>
-                        </div>
+                        <>
+                            <button onClick={() => setCurrentView('admin')} className="btn-line" aria-current={currentView === 'admin' ? 'page' : undefined}><LayoutDashboard size={16} aria-hidden="true" /><span className="hidden sm:inline">Dasbor</span></button>
+                            <button onClick={handleLogout} className="btn-line"><LogOut size={16} aria-hidden="true" /><span className="hidden sm:inline">Keluar</span></button>
+                        </>
                     )}
 
-                    {/* Tombol Hamburger khusus tampilan HP (Mobile) */}
-                    {currentView === 'user' && (
-                        <button
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="lg:hidden p-2 rounded-xl bg-red-700 hover:bg-red-800 text-white font-bold text-xl transition"
-                            aria-label="Toggle Menu"
-                        >
-                            {isMobileMenuOpen ? '✕' : '☰'}
-                        </button>
-                    )}
+                    <button onClick={() => setOpen(!open)} className="btn-line lg:hidden px-3" aria-expanded={open} aria-controls="menu-mobile" aria-label={open ? 'Tutup menu' : 'Buka menu'}>
+                        {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+                    </button>
                 </div>
             </div>
 
-            {/* Dropdown Menu untuk Layar Mobile */}
-            {currentView === 'user' && isMobileMenuOpen && (
-                <div className="lg:hidden bg-red-700 border-t border-red-500/50 px-5 py-4 space-y-3 shadow-inner">
-                    <div className="text-xs bg-red-800 text-red-100 px-3 py-1.5 rounded-lg font-bold mb-3 flex items-center gap-1.5">
-                        📍 Lokasi: <span className="text-white">{headerLocation}</span>
-                    </div>
-                    <a
-                        href="#kualitas-udara"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block py-2 text-sm font-bold text-red-50 hover:text-white border-b border-red-600/60"
-                    >
-                        💨 Kualitas Udara
-                    </a>
-                    <a
-                        href="#lapor"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block py-2 text-sm font-bold text-red-50 hover:text-white border-b border-red-600/60"
-                    >
-                        🚨 Lapor Api
-                    </a>
-                    <a
-                        href="#posko"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block py-2 text-sm font-bold text-red-50 hover:text-white border-b border-red-600/60"
-                    >
-                        🏥 Posko Medis
-                    </a>
-                    <a
-                        href="#berita"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block py-2 text-sm font-bold text-red-50 hover:text-white"
-                    >
-                        📰 Berita Terkini
-                    </a>
-                </div>
+            {open && (
+                <nav id="menu-mobile" aria-label="Menu seluler" className="lg:hidden border-t border-line bg-surface px-4 py-2">
+                    {isPublic && <p className="flex items-center gap-1.5 py-2 text-sm text-muted"><MapPin size={16} aria-hidden="true" />Wilayah: {headerLocation}</p>}
+                    {isPublic && <button type="button" onClick={openReport} className="btn-brand my-2 w-full"><Siren size={18} aria-hidden="true" />Lapor titik api</button>}
+                    {isPublic && NAV.map((n) => (
+                        <a key={n.href} href={n.href} onClick={() => setOpen(false)} className="flex min-h-11 items-center border-t border-line text-base font-medium">{n.label}</a>
+                    ))}
+                    {!isAdminLoggedIn && (
+                        <button onClick={() => { setCurrentView('login'); setOpen(false); }} className="flex min-h-11 w-full items-center gap-2 border-t border-line text-base font-medium text-muted cursor-pointer"><Lock size={16} aria-hidden="true" />Masuk admin</button>
+                    )}
+                </nav>
             )}
         </header>
     );

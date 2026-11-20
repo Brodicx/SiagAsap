@@ -7,6 +7,7 @@ dotenv.config();
 // 2. Membuat Pool Koneksi menggunakan variabel dari .env
 const db = mysql.createPool({
     host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT || 3306),
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
@@ -21,7 +22,7 @@ const db = mysql.createPool({
 const testConnection = async () => {
     try {
         const connection = await db.getConnection();
-        console.log(`✅ BERHASIL: Terhubung ke database MySQL di VPS (${process.env.DB_HOST})`);
+        console.log('✅ BERHASIL: Terhubung ke database MySQL');
         connection.release(); // Lepaskan kembali koneksi setelah dites
     } catch (error) {
         console.error('🔥 GAGAL KONEKSI KE DATABASE:');

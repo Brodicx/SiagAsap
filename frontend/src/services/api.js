@@ -22,6 +22,8 @@ export const fetchIspuByCity = (city) => fetch(`${API_URL}/ispu?city=${city}`).t
 export const fetchPoskoByCity = (city) => fetch(`${API_URL}/posko?city=${city}`).then(r => r.json());
 export const fetchIspuByCoords = (lat, lng) => fetch(`${API_URL}/ispu?lat=${lat}&lng=${lng}`).then(r => r.json());
 export const fetchPoskoByCoords = (lat, lng) => fetch(`${API_URL}/posko?lat=${lat}&lng=${lng}`).then(r => r.json());
+export const fetchHospitalsByCoords = (lat, lng) =>
+    fetch(`${API_URL}/hospitals?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(lng)}`).then(r => r.json());
 
 export const sendReport = (data) => fetch(`${API_URL}/reports`, {
     method: 'POST',

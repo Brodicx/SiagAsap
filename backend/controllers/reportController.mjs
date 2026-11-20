@@ -3,7 +3,7 @@ import db from '../config/db.mjs';
 export const getReports = async (req, res) => {
     try {
         const query = `
-            SELECT r.report_id, u_pelapor.nama AS nama_pelapor, r.lokasi_deskripsi,
+            SELECT r.report_id, u_pelapor.nama AS nama_pelapor, r.whatsapp, r.lokasi_deskripsi,
                    r.kepekatan_asap, r.status_penanganan, r.tgl_lapor
             FROM reports_kebakaran r
             JOIN users u_pelapor ON r.user_id = u_pelapor.user_id
@@ -18,7 +18,7 @@ export const getReports = async (req, res) => {
 };
 
 export const createReport = async (req, res) => {
-    const { nama_pelapor, lokasi_deskripsi, latitude, longitude, kepekatan_asap } = req.body;
+    const { nama_pelapor, whatsapp, lokasi_deskripsi, latitude, longitude, kepekatan_asap } = req.body;
     try {
         const emailGuest = `guest_${Date.now()}@mail.com`;
         const [userRes] = await db.query(
@@ -28,10 +28,10 @@ export const createReport = async (req, res) => {
         const newUserId = userRes.insertId;
 
         const query = `
-            INSERT INTO reports_kebakaran (user_id, lokasi_deskripsi, latitude, longitude, kepekatan_asap)
-            VALUES (?, ?, ?, ?, ?);
+            INSERT INTO reports_kebakaran (user_id, whatsapp, lokasi_deskripsi, latitude, longitude, kepekatan_asap)
+            VALUES (?, ?, ?, ?, ?, ?);
         `;
-        await db.query(query, [newUserId, lokasi_deskripsi, latitude || -2.1985, longitude || 113.8820, kepekatan_asap]);
+        await db.query(query, [newUserId, whatsapp, lokasi_deskripsi, latitude || -2.1985, longitude || 113.8820, kepekatan_asap]);
         res.json({ success: true, message: 'Laporan berhasil terkirim!' });
     } catch (err) {
         console.log("🔥 ERROR POST REPORT:", err);

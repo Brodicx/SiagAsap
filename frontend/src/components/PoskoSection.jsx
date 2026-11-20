@@ -1,52 +1,75 @@
-export default function PoskoSection({ sortedPosko, showAllPosko, setShowAllPosko, userCoords, headerLocation }) {
-    const displayedPosko = showAllPosko ? sortedPosko : sortedPosko.slice(0, 3);
+import { Phone, Navigation, MapPin, ExternalLink } from 'lucide-react';
+import { StateMessage } from './ui';
 
+const hasCoords = (p) => p.latitude != null && p.longitude != null && !Number.isNaN(Number(p.latitude)) && !Number.isNaN(Number(p.longitude));
+
+export default function PoskoSection({
+    sortedFacilities, showAllFacilities, setShowAllFacilities, userCoords, headerLocation,
+    isLoading, isHospitalLoading, hospitalError, onRetryHospitals
+}) {
+    const shown = showAllFacilities ? sortedFacilities : sortedFacilities.slice(0, 4);
+    const rest = sortedFacilities.length - 4;
     return (
-        <section id="posko" className="card-panel">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-5 gap-3">
-                <h2 className="section-title !mb-0 border-none"><span>🏥</span> Posko Medis & Oksigen</h2>
-                {userCoords && (
-                    <span className="text-sm bg-emerald-100 text-emerald-800 font-bold px-4 py-2 rounded-full border border-emerald-200">
-                        📍 Terdekat dari {headerLocation === 'LOKASI ANDA (GPS)' ? 'Lokasi Anda' : headerLocation}
-                    </span>
-                )}
+        <section id="posko" aria-labelledby="h-posko" className="panel scroll-mt-24">
+            <div className="p-5 pb-3 md:p-6 md:pb-3">
+                <h2 id="h-posko" className="text-2xl font-semibold">Rumah sakit dan posko medis</h2>
+                <p className="mt-1 flex items-center gap-1.5 text-[15px] text-muted">
+                    <MapPin size={16} aria-hidden="true" />
+                    {userCoords ? `Diurutkan dari yang terdekat ke ${headerLocation === 'LOKASI ANDA (GPS)' ? 'lokasi Anda' : titleOf(headerLocation)}.` : 'Cari kota atau gunakan lokasi Anda untuk melihat rumah sakit dan posko di sekitarnya.'}
+                </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                {displayedPosko.map((p, idx) => (
-                    <div key={idx} className="p-6 border-2 rounded-2xl bg-blue-50/40 border-blue-100 relative hover:border-blue-300 transition-colors">
-                        <div className="flex justify-between items-start gap-4">
-                            <h3 className="font-bold text-slate-800 text-lg leading-snug">{p.nama_posko}</h3>
-                            {p.distance && (
-                                <span className="text-sm font-black bg-blue-600 text-white px-3 py-1.5 rounded-xl shrink-0">
-                                    {p.distance} km
-                                </span>
-                            )}
-                        </div>
-                        <p className="text-base text-slate-600 mt-2">{p.lokasi}</p>
-                        <div className="mt-4 pt-4 border-t border-blue-200 flex justify-between items-center">
-                            <div>
-                                <p className="text-xs font-bold text-slate-400 uppercase">Bantuan Tersedia</p>
-                                <p className="font-bold text-slate-700 text-base mt-0.5">{p.nama_barang}</p>
-                            </div>
-                            <span className="text-blue-800 font-black bg-blue-200 px-3 py-1.5 rounded-lg border border-blue-300 text-sm">
-                                {p.jumlah_stok} {p.satuan}
-                            </span>
-                        </div>
-                    </div>
-                ))}
-            </div>
+            {isHospitalLoading && <StateMessage kind="loading" title="Memuat rumah sakit di wilayah ini" />}
+            {hospitalError && <StateMessage
+                kind="error"
+                title="Data rumah sakit belum dapat dimuat"
+                action={userCoords && <button onClick={onRetryHospitals} className="btn-line">Coba lagi</button>}
+            >{hospitalError} Posko yang sudah dimasukkan tetap ditampilkan jika tersedia.</StateMessage>}
 
-            {sortedPosko.length > 3 && (
-                <div className="mt-6 flex justify-center">
-                    <button
-                        onClick={() => setShowAllPosko(!showAllPosko)}
-                        className="px-6 py-2.5 bg-white border-2 border-blue-200 text-blue-700 font-bold rounded-xl hover:bg-blue-50 hover:border-blue-300 transition-all text-sm"
-                    >
-                        {showAllPosko ? 'Tutup Sebagian 🔼' : `Lihat Selengkapnya (${sortedPosko.length - 3} Posko Lainnya) 🔽`}
-                    </button>
-                </div>
-            )}
+            {isLoading ? <StateMessage kind="loading" title="Memuat data fasilitas kesehatan" />
+                : sortedFacilities.length === 0
+                    ? isHospitalLoading || hospitalError ? null
+                        : <StateMessage kind="empty" title={userCoords ? 'Belum ada fasilitas yang terdaftar untuk wilayah ini' : 'Belum ada posko yang ditambahkan'}>{userCoords ? 'Data rumah sakit bersumber dari OpenStreetMap dan mungkin belum mencakup semua fasilitas. Posko yang dikelola aplikasi juga akan tampil di sini.' : 'Cari kota atau gunakan lokasi Anda untuk mencari rumah sakit dan posko di sekitar wilayah tersebut.'}</StateMessage>
+                    : (
+                        <ul className="divide-y divide-line border-t border-line">
+                            {shown.map((p, i) => {
+                                const isHospital = p.type === 'hospital';
+                                const stokDiketahui = p.jumlah_stok != null && p.jumlah_stok !== '';
+                                return (
+                                    <li key={isHospital ? p.hospital_id : (p.posko_id ?? i)} className="flex flex-col gap-3 px-5 py-4 md:flex-row md:items-center md:justify-between md:px-6">
+                                        <div className="min-w-0">
+                                            <p className="text-base font-semibold leading-snug">{isHospital ? p.nama : p.nama_posko}
+                                                {p.distance != null && <span className="ml-2 text-sm font-medium text-muted tabular-nums">{p.distance} km</span>}
+                                            </p>
+                                            <p className="text-[15px] text-muted">{isHospital ? p.alamat : p.lokasi}</p>
+                                            {isHospital
+                                                ? <a href={`https://www.openstreetmap.org/${p.osm_type}/${p.osm_id}`} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex min-h-11 items-center gap-1 text-sm font-medium underline underline-offset-2">Data OpenStreetMap <ExternalLink size={14} aria-hidden="true" /></a>
+                                                : <p className="mt-1 text-[15px]">
+                                                    {p.nama_barang
+                                                        ? <>{p.nama_barang}: <span className="font-semibold tabular-nums">{stokDiketahui ? `${p.jumlah_stok} ${p.satuan ?? ''}` : 'jumlah belum diinformasikan'}</span></>
+                                                        : <span className="text-muted">Informasi logistik belum tersedia</span>}
+                                                </p>}
+                                        </div>
+                                        <div className="flex gap-2 shrink-0">
+                                            {p.kontak && <a href={`tel:${String(p.kontak).replace(/[^\d+]/g, '')}`} className="btn-line"><Phone size={16} aria-hidden="true" />Telepon</a>}
+                                            {hasCoords(p) && <a href={`https://www.google.com/maps/dir/?api=1&destination=${p.latitude},${p.longitude}`} target="_blank" rel="noopener noreferrer" className="btn-line"><Navigation size={16} aria-hidden="true" />Petunjuk arah</a>}
+                                        </div>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    )}
+
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-5 py-3 md:px-6">
+                <p className="text-sm text-muted">
+                    Rumah sakit dicari dari titik wilayah terpilih dalam radius sekitar 20 km; data OpenStreetMap dapat belum lengkap.
+                    {' '}<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">© kontributor OpenStreetMap</a>
+                    {' '}· Stok posko dapat berubah karena waktu pembaruan belum tersedia.
+                </p>
+                {rest > 0 && <button onClick={() => setShowAllFacilities(!showAllFacilities)} className="btn-line" aria-expanded={showAllFacilities}>{showAllFacilities ? 'Tampilkan lebih sedikit' : `Tampilkan ${rest} fasilitas lainnya`}</button>}
+            </div>
         </section>
     );
 }
+
+const titleOf = (s = '') => s.charAt(0) + s.slice(1).toLowerCase();

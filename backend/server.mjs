@@ -7,6 +7,7 @@ import ispuRoutes from './routes/ispuRoutes.mjs';
 import reportRoutes from './routes/reportRoutes.mjs';
 import newsRoutes from './routes/newsRoutes.mjs';
 import poskoRoutes from './routes/poskoRoutes.mjs';
+import hospitalRoutes from './routes/hospitalRoutes.mjs';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use('/api/ispu', ispuRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/api/posko', poskoRoutes);
+app.use('/api/hospitals', hospitalRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -1,45 +1,43 @@
 export const getWorstIspu = (ispuList) => {
-    if (!ispuList || ispuList.length === 0) return { index: 0, kategori: 'Baik' };
-    const worst = ispuList.reduce((prev, current) => (prev.ispu_index > current.ispu_index) ? prev : current);
-    return { index: worst.ispu_index, kategori: worst.kategori_udara };
+    if (!ispuList || ispuList.length === 0) return null;
+    const worst = ispuList.reduce((prev, current) => (prev.ispu_index > current.ispu_index ? prev : current));
+    return { index: worst.ispu_index, kategori: worst.kategori_udara, nama: worst.nama_stasiun };
 };
 
+// Saran umum per kategori; bukan pengganti arahan BPBD atau tenaga kesehatan.
 export const getHealthRecommendations = (kategori) => {
     switch (kategori) {
         case 'Baik':
             return [
-                { icon: '🏃', text: 'Sangat baik untuk aktivitas luar ruangan.' },
-                { icon: '🪟', text: 'Buka jendela untuk ventilasi udara segar.' },
-                { icon: '🚴', text: 'Aman untuk olahraga berat.' }
+                { type: 'activity', text: 'Aman untuk aktivitas di luar ruangan, termasuk olahraga.' },
+                { type: 'windows', text: 'Ventilasi rumah boleh dibuka.' },
             ];
         case 'Sedang':
             return [
-                { icon: '🚶', text: 'Kelompok sensitif sebaiknya kurangi aktivitas fisik berat di luar.' },
-                { icon: '🪟', text: 'Masih aman membuka jendela.' },
-                { icon: '😷', text: 'Gunakan masker jika Anda mudah alergi.' }
+                { type: 'activity', text: 'Kelompok sensitif (anak, lansia, penderita asma atau penyakit jantung) sebaiknya mengurangi aktivitas berat di luar.' },
+                { type: 'windows', text: 'Jendela masih boleh dibuka.' },
             ];
         case 'Tidak Sehat':
             return [
-                { icon: '🏃', text: 'Hindari olahraga luar ruangan.' },
-                { icon: '🚪', text: 'Tutup jendela untuk mencegah masuknya udara kotor.' },
-                { icon: '😷', text: 'Gunakan masker (tipe N95 disarankan) jika harus keluar.' },
-                { icon: '💨', text: 'Nyalakan air purifier jika tersedia.' }
+                { type: 'activity', text: 'Hindari olahraga di luar ruangan.' },
+                { type: 'windows', text: 'Tutup jendela.' },
+                { type: 'purifier', text: 'Nyalakan penyaring udara bila ada.' },
+                { type: 'mask', text: 'Pakai masker N95 bila harus keluar.' },
             ];
         case 'Sangat Tidak Sehat':
             return [
-                { icon: '🏠', text: 'Tetap berada di dalam ruangan.' },
-                { icon: '🚪', text: 'Tutup rapat semua jendela dan pintu.' },
-                { icon: '😷', text: 'Wajib gunakan masker N95 jika sangat mendesak untuk keluar.' },
-                { icon: '💨', text: 'Nyalakan air purifier secara terus-menerus.' }
+                { type: 'home', text: 'Tetap di dalam ruangan dengan pintu dan jendela tertutup.' },
+                { type: 'mask', text: 'Pakai masker N95 bila terpaksa keluar.' },
+                { type: 'medical', text: 'Kelompok sensitif yang sesak atau batuk berat perlu ke posko medis.' },
             ];
         case 'Berbahaya (Hitam)':
             return [
-                { icon: '🚨', text: 'BAHAYA! Jangan keluar rumah sama sekali.' },
-                { icon: '🚪', text: 'Tutup dan segel celah jendela/pintu.' },
-                { icon: '😷', text: 'Gunakan masker N95 bahkan di dalam ruangan jika asap terasa.' },
-                { icon: '💨', text: 'Gunakan air purifier pada kecepatan maksimal.' }
+                { type: 'activity', text: 'Jangan beraktivitas di luar ruangan.' },
+                { type: 'windows', text: 'Tutup celah pintu dan jendela.' },
+                { type: 'purifier', text: 'Nyalakan penyaring udara bila ada.' },
+                { type: 'medical', text: 'Segera ke posko medis bila sesak napas.' },
             ];
         default:
-            return [{ icon: 'ℹ️', text: 'Menunggu data kualitas udara...' }];
+            return [{ type: 'home', text: 'Saran akan muncul setelah data kualitas udara dimuat.' }];
     }
 };
