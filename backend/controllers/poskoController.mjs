@@ -13,12 +13,12 @@ export const getPosko = async (req, res) => {
 
         if (city) {
             const cleanCity = city.replace(/\s+/g, '');
-            query += ` WHERE REPLACE(lokasi, ' ', '') LIKE ?`;
+            query += ` WHERE REPLACE(lokasi, ' ', '') ILIKE $1`;
             params.push(`%${cleanCity}%`);
         }
 
-        const [rows] = await db.query(query, params);
-        res.json({ success: true, data: rows });
+        const result = await db.query(query, params);
+        res.json({ success: true, data: result.rows });
     } catch (err) {
         console.error("Error Get Posko:", err);
         res.status(500).json({ success: false, error: err.message });

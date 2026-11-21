@@ -1,36 +1,27 @@
-import mysql from 'mysql2/promise';
+import pg from 'pg';
 import dotenv from 'dotenv';
 
-// 1. Memuat konfigurasi dari file .env
 dotenv.config();
 
-// 2. Membuat Pool Koneksi menggunakan variabel dari .env
-const db = mysql.createPool({
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT || 3306),
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    waitForConnections: true,
-    connectionLimit: 10,  // Batas koneksi maksimal ke VPS
-    queueLimit: 0,
-    enableKeepAlive: true,
-    keepAliveInitialDelay: 10000
+const { Pool } = pg;
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+    throw new Error('DATABASE_URL is required');
+}
+
+const db = new Pool({
+    connectionString,
+    max: 10,
+    connectionTimeoutMillis: 10000
 });
 
-// 3. Tes Koneksi Awal (Otomatis berjalan saat server.mjs dinyalakan)
-const testConnection = async () => {
-    try {
-        const connection = await db.getConnection();
-        console.log('✅ BERHASIL: Terhubung ke database MySQL');
-        connection.release(); // Lepaskan kembali koneksi setelah dites
-    } catch (error) {
-        console.error('🔥 GAGAL KONEKSI KE DATABASE:');
-        console.error('Pesan Error:', error.message);
-    }
-};
+db.query('SELECT 1')
+    .then(() => console.log('Connected to PostgreSQL'))
+    .catch((error) => console.error('PostgreSQL connection failed:', error.message));
 
-testConnection();
+db.on('error', (error) => {
+    console.error('Unexpected PostgreSQL pool error:', error.message);
+});
 
-// 4. Ekspor 'db' agar bisa digunakan di server.mjs
 export default db;
