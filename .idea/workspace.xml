@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ebec200f-8100-46d2-8054-2ef3e10dafc0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/db.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/db.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/newsController.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/newsController.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/reportController.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/reportController.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/server.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AdminLogin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AdminLogin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/IspuSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/IspuSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/NewsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/NewsSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/PoskoSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/PoskoSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ReportSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ReportSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SatgasDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SatgasDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/healthAdvice.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/healthAdvice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseLocalColorSettings">
+    <colors>
+      <entry key="ec6a956f-4194-429d-a140-b34f839ca626" value="" />
+    </colors>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="0.005811814438231289" />
+      <entry key="MS500" value="0.6659018446266511" />
+      <entry key="S2" value="3.586047353481567" />
+      <entry key="S5" value="7.529066230039219" />
+      <entry key="S10" value="10.806268810273016" />
+      <entry key="S30" value="14.45171286002408" />
+      <entry key="S60" value="15.651129166497586" />
+      <entry key="M2" value="16.355973124701507" />
+      <entry key="M5" value="19.9129841572769" />
+      <entry key="M10" value="30.74638856002243" />
+      <entry key="M15" value="40.29628298725986" />
+      <entry key="M30" value="60.89519382461521" />
+      <entry key="H1" value="91.15421669171943" />
+      <entry key="H2" value="144.13998062701052" />
+      <entry key="H4" value="225.28520732998723" />
+      <entry key="D1" value="405.05116952512464" />
+      <entry key="W1" value="458.99122464461954" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000737899715" />
+      <entry key="S2" value="1.0164815987041884" />
+      <entry key="S5" value="1.1935529229707882" />
+      <entry key="S10" value="1.4399465001233538" />
+      <entry key="S30" value="1.760559664010736" />
+      <entry key="S60" value="1.8721009255443377" />
+      <entry key="M2" value="1.9346777438538854" />
+      <entry key="M5" value="2.1130320420498716" />
+      <entry key="M10" value="2.86036367513011" />
+      <entry key="M15" value="3.645460523376915" />
+      <entry key="M30" value="5.29956371556914" />
+      <entry key="H1" value="7.229753390611475" />
+      <entry key="H2" value="10.199725277507232" />
+      <entry key="H4" value="14.40055410732956" />
+      <entry key="D1" value="22.43541162326574" />
+      <entry key="W1" value="24.606464477428986" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.06832006220296825" />
+      <entry key="MS500" value="1.0624247275890153" />
+      <entry key="S2" value="4.2949336620860405" />
+      <entry key="S5" value="8.527253966103135" />
+      <entry key="S10" value="12.109993436000995" />
+      <entry key="S30" value="16.150997956575008" />
+      <entry key="S60" value="17.489873665056162" />
+      <entry key="M2" value="18.273146857303697" />
+      <entry key="M5" value="22.017048128413773" />
+      <entry key="M10" value="33.59850266524579" />
+      <entry key="M15" value="43.93332770441085" />
+      <entry key="M30" value="66.18689959895268" />
+      <entry key="H1" value="98.37779128938024" />
+      <entry key="H2" value="154.33514289356555" />
+      <entry key="H4" value="239.6825295841536" />
+      <entry key="D1" value="427.4857420947586" />
+      <entry key="W1" value="483.59755751148344" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="3Kz2NpG9NQm7IXtf8r7geiz4ue2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.App.jsx.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Rebasing main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/setia/OneDrive/Documents/Pelatihan BBPVP/SiagAsap&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2026.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\setia\OneDrive\Documents\SiagAsap\frontend\src" />
+      <recent name="C:\Users\setia\OneDrive\Documents\SiagAsap\backend\config" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-WS-262.10968.77" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ebec200f-8100-46d2-8054-2ef3e10dafc0" name="Changes" comment="" />
+      <created>1792546038698</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1792546038698</updated>
+      <workItem from="1792546039854" duration="16784000" />
+      <workItem from="1792632026290" duration="13779000" />
+      <workItem from="1792718952971" duration="10815000" />
+      <workItem from="1792936785060" duration="718000" />
+      <workItem from="1792937547232" duration="3282000" />
+      <workItem from="1792980727221" duration="8206000" />
+      <workItem from="1793002466836" duration="7256000" />
+      <workItem from="1793028668463" duration="2160000" />
+      <workItem from="1793032524248" duration="2303000" />
+      <workItem from="1793065093937" duration="2937000" />
+      <workItem from="1793071745932" duration="858000" />
+      <workItem from="1793085175957" duration="2040000" />
+      <workItem from="1793260148959" duration="3170000" />
+      <workItem from="1793583925007" duration="5121000" />
+      <workItem from="1794213200454" duration="963000" />
+      <workItem from="1794930440266" duration="9000" />
+      <workItem from="1795107719270" duration="985000" />
+      <workItem from="1795136868744" duration="735000" />
+      <workItem from="1795137761822" duration="866000" />
+      <workItem from="1795156251080" duration="1421000" />
+      <workItem from="1795158998201" duration="196000" />
+      <workItem from="1795159219084" duration="2878000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
